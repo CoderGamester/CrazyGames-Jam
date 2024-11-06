@@ -26,11 +26,17 @@ MonoBehaviour:
     Layer: 1
     UiType: Game.Presenters.MainHudPresenter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  - AddressableAddress: Prefabs/UI/Menu Screen.prefab
+    Layer: 1
+    UiType: Assets.Src.Presenters.MainMenuPresenter, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   _sets:
   - SetId: 0
     UiConfigsType:
     - Game.Presenters.LoadingScreenPresenter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+    - Assets.Src.Presenters.MainMenuPresenter, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   - SetId: 1
     UiConfigsType:
     - Game.Presenters.GameOverScreenPresenter, Assembly-CSharp, Version=0.0.0.0,

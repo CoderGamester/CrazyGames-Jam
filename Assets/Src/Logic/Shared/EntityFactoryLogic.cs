@@ -24,13 +24,13 @@ namespace Game.Logic.Shared
 	/// <inheritdoc cref="IEntityFactoryLogic"/>
 	public class EntityFactoryLogic : AbstractBaseLogic<PlayerData>, IEntityFactoryLogic
 	{
-		private IGameLogic _gameLogic;
+		private IGameLogicLocator _gameLogic;
 
 		/// <inheritdoc />
 		public UniqueId LastUniqueId => Data.UniqueIdCounter;
 
 		public EntityFactoryLogic(
-			IGameLogic gamelogic,
+			IGameLogicLocator gamelogic,
 			IConfigsProvider configsProvider,
 			IDataProvider dataProvider,
 			ITimeService timeService) :

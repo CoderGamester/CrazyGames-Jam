@@ -43,7 +43,7 @@ namespace Game
 			}
 
 			SceneManager.MergeScenes(SceneManager.GetSceneByName("Boot"), SceneManager.GetSceneByName("Main"));
-			FindObjectsOfType<AudioListener>().All(audioSource => audioSource.enabled = true);
+			FindObjectsByType<AudioListener>(FindObjectsSortMode.None).All(audioSource => audioSource.enabled = true);
 			Destroy(gameObject);
 		}
 	}

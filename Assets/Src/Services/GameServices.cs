@@ -20,7 +20,7 @@ namespace Game.Services
 		/// <inheritdoc cref="IMessageBrokerService"/>
 		IMessageBrokerService MessageBrokerService { get; }
 		/// <inheritdoc cref="ICommandService{T}"/>
-		ICommandService<IGameLogic> CommandService { get; }
+		ICommandService<IGameLogicLocator> CommandService { get; }
 		/// <inheritdoc cref="IPoolService"/>
 		IPoolService PoolService { get; }
 		/// <inheritdoc cref="ITickService"/>
@@ -43,7 +43,7 @@ namespace Game.Services
 		/// <inheritdoc />
 		public IMessageBrokerService MessageBrokerService { get; }
 		/// <inheritdoc />
-		public ICommandService<IGameLogic> CommandService { get; }
+		public ICommandService<IGameLogicLocator> CommandService { get; }
 		/// <inheritdoc />
 		public IPoolService PoolService { get; }
 		/// <inheritdoc />
@@ -64,7 +64,7 @@ namespace Game.Services
 		public GameServices(IInstaller installer)
 		{
 			MessageBrokerService = installer.Resolve<IMessageBrokerService>();
-			CommandService = installer.Resolve<ICommandService<IGameLogic>>();
+			CommandService = installer.Resolve<ICommandService<IGameLogicLocator>>();
 			PoolService = installer.Resolve<IPoolService>();
 			TickService = installer.Resolve<ITickService>();
 			TimeService = installer.Resolve<ITimeService>();

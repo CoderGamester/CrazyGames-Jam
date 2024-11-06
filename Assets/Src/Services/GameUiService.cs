@@ -18,14 +18,9 @@ namespace Game.Services
 		/// </summary>
 		Task LoadGameUiSet(UiSetId uiSetId, float loadingCap);
 	}
-
-	/// <inheritdoc cref="IGameUiService"/>
-	public interface IGameUiServiceInit : IGameUiService, IUiServiceInit
-	{
-	}
 	
 	/// <inheritdoc cref="IGameUiService"/>
-	public class GameUiService : UiService, IGameUiServiceInit
+	public class GameUiService : UiService, IGameUiService, IUiServiceInit
 	{
 		public GameUiService(IUiAssetLoader assetLoader) : base(assetLoader)
 		{

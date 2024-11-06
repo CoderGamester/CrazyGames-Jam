@@ -13,6 +13,7 @@ namespace Game.Presenters
 	/// </summary>
 	public class GameOverScreenPresenter : UiPresenter
 	{
+		[SerializeField] private Button _menuButton;
 		[SerializeField] private Button _restartButton;
 
 		private IGameServices _services;
@@ -21,12 +22,18 @@ namespace Game.Presenters
 		{
 			_services = MainInstaller.Resolve<IGameServices>();
 
+			_menuButton.onClick.AddListener(MainMenuButtonClicked);
 			_restartButton.onClick.AddListener(Restart);
 		}
 
 		private void Restart()
 		{
 			_services.MessageBrokerService.Publish(new OnGameRestartClickedMessage());
+		}
+
+		private void MainMenuButtonClicked()
+		{
+			_services.MessageBrokerService.Publish(new OnMenuClickedMessage());
 		}
 	}
 }

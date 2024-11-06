@@ -13,6 +13,7 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.InputSystem.UI;
 using System.Collections;
 using Game.Messages;
+using Game.Controllers;
 
 // ReSharper disable once CheckNamespace
 
@@ -28,7 +29,7 @@ namespace Game
 		
 		private GameStateMachine _stateMachine;
 		private GameServices _services;
-		private IGameLogic _gameLogic;
+		private IGameLogicLocator _gameLogic;
 		private IDataService _dataService;
 		private Coroutine _pauseCoroutine;
 		private bool _onApplicationPauseFlag;
@@ -41,7 +42,7 @@ namespace Game
 
 			installer.Bind<IMessageBrokerService>(new MessageBrokerService());
 			installer.Bind<ITimeService>(new TimeService());
-			installer.Bind<GameUiService, IGameUiServiceInit, IGameUiService>(new GameUiService(new UiAssetLoader()));
+			installer.Bind<GameUiService, IUiServiceInit, IGameUiService>(new GameUiService(new UiAssetLoader()));
 			installer.Bind<IPoolService>(new PoolService());
 			installer.Bind<ITickService>(new TickService());
 			installer.Bind<IAnalyticsService>(new AnalyticsService());
@@ -50,16 +51,20 @@ namespace Game
 			installer.Bind<ConfigsProvider, IConfigsAdder, IConfigsProvider>(new ConfigsProvider());
 			installer.Bind<DataService, IDataService, IDataProvider>(new DataService());
 
-			var gameLogic = new GameLogic(installer);
+			var gameLogic = new GameLogicLocator(installer);
+			var commandService = new CommandService<IGameLogicLocator>(gameLogic, installer.Resolve<IMessageBrokerService>());
 
 			installer.Bind<IGameLogicInit>(gameLogic);
-			installer.Bind<IGameDataProvider>(gameLogic);
-			installer.Bind<ICommandService<IGameLogic>>(new CommandService<IGameLogic>(gameLogic, installer.Resolve<IMessageBrokerService>()));
+			installer.Bind<IGameDataProviderLocator>(gameLogic);
+			installer.Bind<ICommandService<IGameLogicLocator>>(commandService);
 
 			var gameServices = new GameServices(installer);
+			var gameControllers = new GameControllerLocator(gameServices);
 
 			installer.Bind<IGameServices>(gameServices);
-			MainInstaller.Bind<IGameDataProvider>(gameLogic);
+			installer.Bind<GameControllerLocator, IGameController, IGameControllerLocator>(gameControllers);
+			MainInstaller.Bind<IGameControllerLocator>(gameControllers);
+			MainInstaller.Bind<IGameDataProviderLocator>(gameLogic);
 			MainInstaller.Bind<IGameServices>(gameServices);
 
 			_dataService = installer.Resolve<IDataService>();
@@ -90,7 +95,7 @@ namespace Game
 			EnhancedTouchSupport.Enable();
 			InitAtt();
 
-			await Task.WhenAll(VersionServices.LoadVersionDataAsync(), UnityServices.InitializeAsync());
+			await Task.WhenAll(VersionServices.LoadVersionDataAsync());//, UnityServices.InitializeAsync());
 
 			InitAnalytics();
 			_stateMachine.Run();
@@ -134,7 +139,6 @@ namespace Game
 			_onApplicationAlreadyQuitFlag = true;
 
 			_dataService.SaveAllData();
-			_stateMachine.Dispose();
 			_services.MessageBrokerService.Publish(new ApplicationQuitMessage());
 			_services.AnalyticsService.SessionCalls.SessionEnd(_gameLogic.AppLogic.QuitReason);
 		}
@@ -164,7 +168,7 @@ namespace Game
 		private void InitAnalytics()
 		{
 			// TODO: request data collection permition (use ask age screen for example)
-			Unity.Services.Analytics.AnalyticsService.Instance.StartDataCollection();
+			//Unity.Services.Analytics.AnalyticsService.Instance.StartDataCollection();
 			_services.AnalyticsService.SessionCalls.PlayerLogin(SystemInfo.deviceUniqueIdentifier);
 		}
 

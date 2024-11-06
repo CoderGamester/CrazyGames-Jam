@@ -10,6 +10,7 @@ using Game.Views;
 using UnityEngine.UI;
 using System;
 using Game.Messages;
+using Game.Controllers;
 
 namespace Game.Presenters
 {
@@ -23,15 +24,18 @@ namespace Game.Presenters
 		[SerializeField] private TextMeshProUGUI _version;
 		[SerializeField] private TextMeshProUGUI _softCurrencyText;
 		[SerializeField] private TextMeshProUGUI _hardCurrencyText;
+		[SerializeField] private TextMeshProUGUI _ammotText;
 		[SerializeField] private Button _gameOverButton;
 
-		private IGameDataProvider _dataProvider;
+		private IGameDataProviderLocator _dataProvider;
 		private IGameServices _services;
+		private IGameControllerLocator _gameController;
 
 		private void Awake()
 		{
-			_dataProvider = MainInstaller.Resolve<IGameDataProvider>();
+			_dataProvider = MainInstaller.Resolve<IGameDataProviderLocator>();
 			_services = MainInstaller.Resolve<IGameServices>();
+			_gameController = MainInstaller.Resolve<IGameControllerLocator>();
 
 			_timer.Init(_services);
 			_gameOverButton.onClick.AddListener(GameOverClicked);
@@ -49,6 +53,12 @@ namespace Game.Presenters
 		{
 			_dataProvider.CurrencyDataProvider.Currencies.InvokeObserve(GameId.SoftCurrency, OnSoftCurrencyUpdated);
 			_dataProvider.CurrencyDataProvider.Currencies.InvokeObserve(GameId.HardCurrency, OnHardCurrencyUpdated);
+			_gameController.GameplayController.Ammo.InvokeObserve(OnAmmoUpdated);
+		}
+
+		private void OnAmmoUpdated(int oldValue, int newValue)
+		{
+			_ammotText.text = $"Ammo: {newValue.ToString()}";
 		}
 
 		private void OnSoftCurrencyUpdated(GameId currency, int amountBefore, int amountAfter, ObservableUpdateType updateType)

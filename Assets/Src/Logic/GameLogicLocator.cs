@@ -20,7 +20,7 @@ namespace Game.Logic
 	/// Provides access to all game's data.
 	/// This interface provides the data with view only permissions
 	/// </summary>
-	public interface IGameDataProvider
+	public interface IGameDataProviderLocator
 	{
 		/// <inheritdoc cref="IAppDataProvider"/>
 		IAppDataProvider AppDataProvider { get; }
@@ -39,7 +39,7 @@ namespace Game.Logic
 	/// This interface shouldn't be exposed to the views or controllers
 	/// To interact with the logic, execute a <see cref="Commands.IGameCommand"/> via the <see cref="ICommandService"/>
 	/// </summary>
-	public interface IGameLogic : IGameDataProvider
+	public interface IGameLogicLocator : IGameDataProviderLocator
 	{
 		/// <inheritdoc cref="IAppLogic"/>
 		IAppLogic AppLogic { get; }
@@ -64,8 +64,8 @@ namespace Game.Logic
 		void Init(IDataService dataService, IGameServices gameServices);
 	}
 
-	/// <inheritdoc cref="IGameLogic"/>
-	public class GameLogic : IGameLogic, IGameLogicInit
+	/// <inheritdoc cref="IGameLogicLocator"/>
+	public class GameLogicLocator : IGameLogicLocator, IGameLogicInit
 	{
 		/// <inheritdoc />
 		public IAppDataProvider AppDataProvider => AppLogic;
@@ -89,7 +89,7 @@ namespace Game.Logic
 		/// <inheritdoc />
 		public ICurrencyLogic CurrencyLogic { get; }
 
-		public GameLogic(IInstaller installer)
+		public GameLogicLocator(IInstaller installer)
 		{
 			var configsProvider = installer.Resolve<IConfigsProvider>();
 			var dataService = installer.Resolve<IDataService>();

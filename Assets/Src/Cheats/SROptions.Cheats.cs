@@ -18,7 +18,7 @@ public partial class SROptions
 	[Category("Currency")]
 	public void Add100Sc()
 	{
-		var currencyLogic = MainInstaller.Resolve<IGameDataProvider>().CurrencyDataProvider as CurrencyLogic;
+		var currencyLogic = MainInstaller.Resolve<IGameDataProviderLocator>().CurrencyDataProvider as CurrencyLogic;
 		
 		currencyLogic.AddCurrency(GameId.SoftCurrency, 100);
 	}
@@ -26,7 +26,7 @@ public partial class SROptions
 	[Category("Currency")]
 	public void Add1000Sc()
 	{
-		var currencyLogic = MainInstaller.Resolve<IGameDataProvider>().CurrencyDataProvider as CurrencyLogic;
+		var currencyLogic = MainInstaller.Resolve<IGameDataProviderLocator>().CurrencyDataProvider as CurrencyLogic;
 		
 		currencyLogic.AddCurrency(GameId.SoftCurrency, 1000);
 	}
@@ -34,7 +34,7 @@ public partial class SROptions
 	[Category("Currency")]
 	public void Add100Hc()
 	{
-		var currencyLogic = MainInstaller.Resolve<IGameDataProvider>().CurrencyDataProvider as CurrencyLogic;
+		var currencyLogic = MainInstaller.Resolve<IGameDataProviderLocator>().CurrencyDataProvider as CurrencyLogic;
 		
 		currencyLogic.AddCurrency(GameId.HardCurrency, 100);
 	}

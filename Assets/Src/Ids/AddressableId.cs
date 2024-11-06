@@ -16,7 +16,8 @@ namespace Game.Ids
 		Prefabs_Configs_UiConfigs,
 		Prefabs_UI_GameOver,
 		Prefabs_UI_Loading_Screen,
-		Prefabs_UI_MainHud
+		Prefabs_UI_MainHud,
+		Prefabs_UI_Menu_Screen
 	}
 
 	public enum AddressableLabel
@@ -64,12 +65,13 @@ namespace Game.Ids
 		{
 			{"GenerateIds", new List<AddressableConfig>
 				{
-					new AddressableConfig(0, "Prefabs/UI/MainHud.prefab", "Assets/Prefabs/UI/MainHud.prefab", typeof(UnityEngine.GameObject), new [] {"GenerateIds"}),
-					new AddressableConfig(1, "Prefabs/UI/Loading Screen.prefab", "Assets/Prefabs/UI/Loading Screen.prefab", typeof(UnityEngine.GameObject), new [] {"GenerateIds"}),
-					new AddressableConfig(2, "Prefabs/UI/GameOver.prefab", "Assets/Prefabs/UI/GameOver.prefab", typeof(UnityEngine.GameObject), new [] {"GenerateIds"}),
-					new AddressableConfig(3, "Prefabs/Configs/UiConfigs.asset", "Assets/Prefabs/Configs/UiConfigs.asset", typeof(GameLovers.UiService.UiConfigs), new [] {"GenerateIds"}),
-					new AddressableConfig(4, "Prefabs/Configs/GameConfigs.asset", "Assets/Prefabs/Configs/GameConfigs.asset", typeof(Game.Configs.GameConfigs), new [] {"GenerateIds"}),
-					new AddressableConfig(5, "Prefabs/Configs/DataConfigs.asset", "Assets/Prefabs/Configs/DataConfigs.asset", typeof(Game.Configs.DataConfigs), new [] {"GenerateIds"}),
+					new AddressableConfig(0, "Prefabs/UI/Menu Screen.prefab", "Assets/Prefabs/UI/Menu Screen.prefab", typeof(UnityEngine.GameObject), new [] {"GenerateIds"}),
+					new AddressableConfig(1, "Prefabs/UI/MainHud.prefab", "Assets/Prefabs/UI/MainHud.prefab", typeof(UnityEngine.GameObject), new [] {"GenerateIds"}),
+					new AddressableConfig(2, "Prefabs/UI/Loading Screen.prefab", "Assets/Prefabs/UI/Loading Screen.prefab", typeof(UnityEngine.GameObject), new [] {"GenerateIds"}),
+					new AddressableConfig(3, "Prefabs/UI/GameOver.prefab", "Assets/Prefabs/UI/GameOver.prefab", typeof(UnityEngine.GameObject), new [] {"GenerateIds"}),
+					new AddressableConfig(4, "Prefabs/Configs/UiConfigs.asset", "Assets/Prefabs/Configs/UiConfigs.asset", typeof(GameLovers.UiService.UiConfigs), new [] {"GenerateIds"}),
+					new AddressableConfig(5, "Prefabs/Configs/GameConfigs.asset", "Assets/Prefabs/Configs/GameConfigs.asset", typeof(Game.Configs.GameConfigs), new [] {"GenerateIds"}),
+					new AddressableConfig(6, "Prefabs/Configs/DataConfigs.asset", "Assets/Prefabs/Configs/DataConfigs.asset", typeof(Game.Configs.DataConfigs), new [] {"GenerateIds"}),
 				}.AsReadOnly()}
 		});
 
@@ -80,7 +82,8 @@ namespace Game.Ids
 			new AddressableConfig(2, "Prefabs/Configs/UiConfigs.asset", "Assets/Prefabs/Configs/UiConfigs.asset", typeof(GameLovers.UiService.UiConfigs), new [] {"GenerateIds"}),
 			new AddressableConfig(3, "Prefabs/UI/GameOver.prefab", "Assets/Prefabs/UI/GameOver.prefab", typeof(UnityEngine.GameObject), new [] {"GenerateIds"}),
 			new AddressableConfig(4, "Prefabs/UI/Loading Screen.prefab", "Assets/Prefabs/UI/Loading Screen.prefab", typeof(UnityEngine.GameObject), new [] {"GenerateIds"}),
-			new AddressableConfig(5, "Prefabs/UI/MainHud.prefab", "Assets/Prefabs/UI/MainHud.prefab", typeof(UnityEngine.GameObject), new [] {"GenerateIds"})
+			new AddressableConfig(5, "Prefabs/UI/MainHud.prefab", "Assets/Prefabs/UI/MainHud.prefab", typeof(UnityEngine.GameObject), new [] {"GenerateIds"}),
+			new AddressableConfig(6, "Prefabs/UI/Menu Screen.prefab", "Assets/Prefabs/UI/Menu Screen.prefab", typeof(UnityEngine.GameObject), new [] {"GenerateIds"})
 		}.AsReadOnly();
 	}
 }

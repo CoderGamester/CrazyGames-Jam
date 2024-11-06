@@ -3,7 +3,7 @@ using System;
 namespace Game.Logic.Shared
 {
 	/// <summary>
-	/// Exception to be used in any of the logic's <see cref="GameLogic"/>
+	/// Exception to be used in any of the logic's <see cref="GameLogicLocator"/>
 	/// </summary>
 	[Serializable]
 	public class LogicException : Exception

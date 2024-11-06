@@ -17,11 +17,11 @@ namespace Game.StateMachines
 	/// <summary>
 	/// This class represents the Loading state in the <seealso cref="GameStateMachine"/>
 	/// </summary>
-	internal class InitialLoadingState
+	public class InitialLoadingState
 	{
 		private readonly IGameServices _services;
 		private readonly IGameLogicInit _gameLogic;
-		private readonly IGameUiServiceInit _uiService;
+		private readonly IUiServiceInit _uiService;
 		private readonly IConfigsAdder _configsAdder;
 		private readonly IDataService _dataService;
 
@@ -29,7 +29,7 @@ namespace Game.StateMachines
 		{
 			_gameLogic = installer.Resolve<IGameLogicInit>();
 			_services = installer.Resolve<IGameServices>();
-			_uiService = installer.Resolve<IGameUiServiceInit>();
+			_uiService = installer.Resolve<IUiServiceInit>();
 			_configsAdder = installer.Resolve<IConfigsAdder>();
 			_dataService = installer.Resolve<IDataService>();
 		}

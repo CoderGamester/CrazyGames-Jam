@@ -4,7 +4,7 @@ using GameLovers.Services;
 namespace Game.Logic.Shared
 {
 	/// <summary>
-	/// Abstract basic signature for any Logic that is part of the <see cref="IGameLogic"/>
+	/// Abstract basic signature for any Logic that is part of the <see cref="IGameLogicLocator"/>
 	/// </summary>
 	public abstract class AbstractBaseLogic<TData> where TData : class
 	{
